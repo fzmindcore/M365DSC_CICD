@@ -1,4 +1,4 @@
-﻿function New-M365DSCServicePrincipal
+function New-M365DSCServicePrincipal
 {
     [CmdletBinding()]
     param
@@ -75,8 +75,7 @@
 
         try
         {
-            $certObj = New-Object System.Security.Cryptography.X509Certificates.X509Certificate2
-            $certObj.Import($CertificatePath)
+            $cert = New-Object -TypeName System.Security.Cryptography.X509Certificates.X509Certificate2($CertificatePath)
         }
         catch
         {
@@ -252,8 +251,7 @@
 
         $applicationId = $app.AppId
 
-        $cert = New-Object System.Security.Cryptography.X509Certificates.X509Certificate2
-        $cert.Import($CertificatePath)
+        $cert = New-Object -TypeName System.Security.Cryptography.X509Certificates.X509Certificate2($CertificatePath)
 
         $certThumbprint = $cert.Thumbprint
 

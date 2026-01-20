@@ -1,4 +1,4 @@
-﻿BeforeDiscovery {
+BeforeDiscovery {
     $workingDirectoryCICD = $PSScriptRoot
     $rootDirectoryCICD = Split-Path -Path (Split-Path -Path $workingDirectoryCICD -Parent) -Parent
     $rootDirectoryData = Join-Path -Path (Split-Path -Path $rootDirectoryCICD -Parent) -ChildPath 'Data'
@@ -28,7 +28,7 @@
     $allEnvFileName = $envFiles | ForEach-Object { @{ BaseName = $_.BaseName; FolderName = $_.Directory.Name } }
 
     $filesInDataRepo = @()
-    $items = Get-ChildItem -Path $rootDirectoryData -Exclude ".git*","Supportscripts",".vscode*" | Get-ChildItem -Recurse -File
+    $items = Get-ChildItem -Path $rootDirectoryData -Exclude ".git*","Supportscripts",".vscode*","LICENSE" | Get-ChildItem -Recurse -File
     foreach ($item in $items)
     {
         $filesInDataRepo += @{
@@ -38,7 +38,7 @@
     }
 
     $filesInCICDRepo = @()
-    $items = Get-ChildItem -Path $rootDirectoryCICD -Exclude ".git*","Supportscripts",".vscode*" | Foreach-Object { Get-ChildItem -Path $_.FullName -Recurse -File -Exclude "*.dll*" }
+    $items = Get-ChildItem -Path $rootDirectoryCICD -Exclude ".git*","Supportscripts",".vscode*","LICENSE" | Foreach-Object { Get-ChildItem -Path $_.FullName -Recurse -File -Exclude "*.dll*" }
     foreach ($item in $items)
     {
         $filesInCICDRepo += @{
